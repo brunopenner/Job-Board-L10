@@ -23,7 +23,7 @@
     @foreach ($jobs as $job)
         <x-job-card :$job>
             <div class="">
-                <x-link-button :href="route('jobs.show', $job)" >Show</x-link-button>
+                <x-link-button :href="route('jobs.show', $job)" >Read More</x-link-button>
             </div>
         </x-job-card>
     @endforeach
