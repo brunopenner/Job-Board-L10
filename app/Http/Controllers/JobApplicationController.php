@@ -3,16 +3,19 @@
 namespace App\Http\Controllers;
 
 use App\Models\Job;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
 
 class JobApplicationController extends Controller
 {
+    use AuthorizesRequests;
 
     /**
      * Show the form for creating a new resource.
      */
     public function create(Job $job)
     {
+        $this->authorize('apply', $job);
         return view('job_application.create', ['job' => $job]);
     }
 
@@ -21,6 +24,7 @@ class JobApplicationController extends Controller
      */
     public function store(Job $job, Request $request)
     {
+        $this->authorize('apply', $job);
         $job->jobApplications()->create([
             'user_id' => $request->user()->id,
             ...$request->validate([
