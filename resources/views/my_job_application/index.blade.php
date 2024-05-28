@@ -19,10 +19,23 @@
                         Average expected salary ${{number_format($application->job->job_applications_avg_expected_salary)}}
                     </div>
                 </div>
-                <div>Right</div>
+                <div>
+                    <form action="{{route('my-job-applications.destroy', $application)}}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <x-button>Cancel</x-button>
+                    </form>
+                </div>
             </div>
         </x-job-card>
     @empty
-        
+        <div class="rounded-md border border-dashed border-slate-300 py-8 px-8">
+            <div class="text-center font-medium">
+                No Job Application yet
+            </div>
+            <div class="text-center">
+                <a href="{{route('jobs.index')}}" class="text-indigo-500 hover:underline">Find Jobs</a>
+            </div>
+        </div>
     @endforelse
 </x-layout>
